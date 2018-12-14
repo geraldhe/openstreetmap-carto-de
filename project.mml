@@ -30,7 +30,7 @@ _parts:
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
     type: "postgis"
-    dbname: "osm"
+    dbname: "gis"
     key_field: ""
     geometry_field: "way"
     extent: "-20037508,-20037508,20037508,20037508"
@@ -2771,7 +2771,7 @@ Layer:
           ORDER BY way_pixels DESC NULLS LAST
         ) AS addresses
     properties:
-      minzoom: 17
+      minzoom: 16
   - id: water-lines-text
     geometry: linestring
     <<: *extents
