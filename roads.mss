@@ -125,6 +125,7 @@
 @secondary-width-z12:             2.5;
 @secondary-link-width-z12:        1.5;
 @tertiary-width-z12:              2.5;
+@tertiary-link-width-z12:         1.5;
 @residential-width-z12:           0.5;
 @unclassified-width-z12:          0.8;
 
@@ -137,6 +138,7 @@
 @secondary-width-z13:             5;
 @secondary-link-width-z13:        4;
 @tertiary-width-z13:              4;
+@tertiary-link-width-z13:         3;
 @residential-width-z13:           2.5;
 @living-street-width-z13:         2;
 @bridleway-width-z13:             0.3;
@@ -164,7 +166,8 @@
 @primary-link-width-z15:        7.8;
 @secondary-width-z15:            10;
 @secondary-link-width-z15:        7;
-@tertiary-width-z15:             10;
+@tertiary-width-z15:              9;
+@tertiary-link-width-z15:         7;
 @residential-width-z15:           5;
 @living-street-width-z15:         5;
 @pedestrian-width-z15:            5;
@@ -197,7 +200,8 @@
 @primary-link-width-z17:         12;
 @secondary-width-z17:            16;
 @secondary-link-width-z17:       12;
-@tertiary-width-z17:             16;
+@tertiary-width-z17:             18;
+@tertiary-link-width-z17:        12;
 @residential-width-z17:          12;
 @living-street-width-z17:        12;
 @pedestrian-width-z17:           12;
@@ -214,7 +218,8 @@
 @primary-link-width-z18:         13;
 @secondary-width-z18:            17;
 @secondary-link-width-z18:       13;
-@tertiary-width-z18:             17;
+@tertiary-width-z18:             21;
+@tertiary-link-width-z18:        13;
 @residential-width-z18:          13;
 @living-street-width-z18:        13;
 @pedestrian-width-z18:           13;
@@ -234,6 +239,7 @@
 @secondary-link-width-z19:       16;
 @secondary-link-width-z19:       16;
 @tertiary-width-z19:             27;
+@tertiary-link-width-z19:        16;
 @residential-width-z19:          17;
 @living-street-width-z19:        17;
 @pedestrian-width-z19:           17;
@@ -829,6 +835,14 @@ Casing width is @proposed_casing_factor the width of normal road casing.
         [zoom >= 17] { line-width: @tertiary-width-z17; }
         [zoom >= 18] { line-width: @tertiary-width-z18; }
         [zoom >= 19] { line-width: @tertiary-width-z19; }
+        [link = 'yes'] {
+          line-width: @tertiary-link-width-z12;
+          [zoom >= 13] { line-width: @tertiary-link-width-z13; }
+          [zoom >= 15] { line-width: @tertiary-link-width-z15; }
+          [zoom >= 17] { line-width: @tertiary-link-width-z17; }
+          [zoom >= 18] { line-width: @tertiary-link-width-z18; }
+          [zoom >= 19] { line-width: @tertiary-link-width-z19; }
+        }
         #roads-casing {
           line-join: round;
           line-cap: round;
@@ -1927,24 +1941,264 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [zoom >= 19] { line-width: @residential-width-z19 - 2 * @casing-width-z19; }
         #roads-fill, #bridges {
           line-color: @residential-fill;
-		  [name =~ "B.*"] {
-			line-color: #fabebe;
-		  }
-		  [name =~ "G.*"] {
-			line-color: #ffd8b1;
-		  }
-		  [name =~ "L.*"] {
-			line-color: #fffac8;
-		  }
-		  [name =~ "M.*"] {
-			line-color: #aaffc3;
-		  }
-		  [name =~ "O.*"] {
-			line-color: #e6beff;
-		  }
-		  [name =~ "U.*"] {
-			line-color: #b2cfff;
-		  }
+[colorindex = 0] { line-color: #fabebe; }
+[colorindex = 1] { line-color: darken(#fabebe, 2%); }
+[colorindex = 2] { line-color: darken(#fabebe, 4%); }
+[colorindex = 3] { line-color: darken(#fabebe, 6%); }
+[colorindex = 4] { line-color: darken(#fabebe, 8%); }
+[colorindex = 5] { line-color: darken(#fabebe, 10%); }
+[colorindex = 6] { line-color: darken(#fabebe, 12%); }
+[colorindex = 7] { line-color: darken(#fabebe, 14%); }
+[colorindex = 8] { line-color: darken(#fabebe, 16%); }
+[colorindex = 9] { line-color: darken(#fabebe, 18%); }
+[colorindex = 10] { line-color: darken(#fabebe, 20%); }
+[colorindex = 11] { line-color: darken(#fabebe, 22%); }
+[colorindex = 12] { line-color: darken(#fabebe, 24%); }
+[colorindex = 13] { line-color: darken(#fabebe, 26%); }
+[colorindex = 14] { line-color: darken(#fabebe, 28%); }
+[colorindex = 15] { line-color: darken(#fabebe, 30%); }
+[colorindex = 16] { line-color: darken(#fabebe, 32%); }
+[colorindex = 17] { line-color: darken(#fabebe, 34%); }
+[colorindex = 18] { line-color: darken(#fabebe, 36%); }
+[colorindex = 19] { line-color: darken(#fabebe, 38%); }
+[colorindex = 20] { line-color: darken(#fabebe, 40%); }
+[colorindex = 21] { line-color: darken(#fabebe, 42%); }
+[colorindex = 22] { line-color: darken(#fabebe, 44%); }
+[colorindex = 23] { line-color: darken(#fabebe, 46%); }
+[colorindex = 24] { line-color: darken(#fabebe, 48%); }
+[colorindex = 25] { line-color: darken(#fabebe, 50%); }
+[colorindex = 26] { line-color: darken(#fabebe, 52%); }
+[colorindex = 27] { line-color: darken(#fabebe, 54%); }
+[colorindex = 28] { line-color: darken(#fabebe, 56%); }
+[colorindex = 29] { line-color: darken(#fabebe, 58%); }
+[colorindex = 30] { line-color: darken(#fabebe, 60%); }
+[colorindex = 31] { line-color: darken(#fabebe, 62%); }
+[colorindex = 32] { line-color: darken(#fabebe, 64%); }
+[colorindex = 33] { line-color: darken(#fabebe, 66%); }
+[colorindex = 34] { line-color: darken(#fabebe, 68%); }
+[colorindex = 35] { line-color: darken(#fabebe, 70%); }
+[colorindex = 36] { line-color: darken(#fabebe, 72%); }
+[colorindex = 37] { line-color: darken(#fabebe, 74%); }
+[colorindex = 38] { line-color: darken(#fabebe, 76%); }
+[colorindex = 39] { line-color: darken(#fabebe, 78%); }
+[colorindex = 40] { line-color: darken(#fabebe, 80%); }
+[colorindex = 41] { line-color: darken(#fabebe, 82%); }
+[colorindex = 42] { line-color: darken(#fabebe, 84%); }
+[colorindex = 43] { line-color: #ffd8b1; }
+[colorindex = 44] { line-color: darken(#ffd8b1, 2%); }
+[colorindex = 45] { line-color: darken(#ffd8b1, 4%); }
+[colorindex = 46] { line-color: darken(#ffd8b1, 6%); }
+[colorindex = 47] { line-color: darken(#ffd8b1, 8%); }
+[colorindex = 48] { line-color: darken(#ffd8b1, 10%); }
+[colorindex = 49] { line-color: darken(#ffd8b1, 12%); }
+[colorindex = 50] { line-color: darken(#ffd8b1, 14%); }
+[colorindex = 51] { line-color: darken(#ffd8b1, 16%); }
+[colorindex = 52] { line-color: darken(#ffd8b1, 18%); }
+[colorindex = 53] { line-color: darken(#ffd8b1, 20%); }
+[colorindex = 54] { line-color: darken(#ffd8b1, 22%); }
+[colorindex = 55] { line-color: darken(#ffd8b1, 24%); }
+[colorindex = 56] { line-color: darken(#ffd8b1, 26%); }
+[colorindex = 57] { line-color: darken(#ffd8b1, 28%); }
+[colorindex = 58] { line-color: darken(#ffd8b1, 30%); }
+[colorindex = 59] { line-color: darken(#ffd8b1, 32%); }
+[colorindex = 60] { line-color: darken(#ffd8b1, 34%); }
+[colorindex = 61] { line-color: darken(#ffd8b1, 36%); }
+[colorindex = 62] { line-color: darken(#ffd8b1, 38%); }
+[colorindex = 63] { line-color: darken(#ffd8b1, 40%); }
+[colorindex = 64] { line-color: darken(#ffd8b1, 42%); }
+[colorindex = 65] { line-color: darken(#ffd8b1, 44%); }
+[colorindex = 66] { line-color: darken(#ffd8b1, 46%); }
+[colorindex = 67] { line-color: darken(#ffd8b1, 48%); }
+[colorindex = 68] { line-color: darken(#ffd8b1, 50%); }
+[colorindex = 69] { line-color: darken(#ffd8b1, 52%); }
+[colorindex = 70] { line-color: darken(#ffd8b1, 54%); }
+[colorindex = 71] { line-color: darken(#ffd8b1, 56%); }
+[colorindex = 72] { line-color: darken(#ffd8b1, 58%); }
+[colorindex = 73] { line-color: darken(#ffd8b1, 60%); }
+[colorindex = 74] { line-color: darken(#ffd8b1, 62%); }
+[colorindex = 75] { line-color: darken(#ffd8b1, 64%); }
+[colorindex = 76] { line-color: darken(#ffd8b1, 66%); }
+[colorindex = 77] { line-color: darken(#ffd8b1, 68%); }
+[colorindex = 78] { line-color: darken(#ffd8b1, 70%); }
+[colorindex = 79] { line-color: darken(#ffd8b1, 72%); }
+[colorindex = 80] { line-color: darken(#ffd8b1, 74%); }
+[colorindex = 81] { line-color: darken(#ffd8b1, 76%); }
+[colorindex = 82] { line-color: darken(#ffd8b1, 78%); }
+[colorindex = 83] { line-color: darken(#ffd8b1, 80%); }
+[colorindex = 84] { line-color: darken(#ffd8b1, 82%); }
+[colorindex = 85] { line-color: darken(#ffd8b1, 84%); }
+[colorindex = 86] { line-color: #fffac8; }
+[colorindex = 87] { line-color: darken(#fffac8, 2%); }
+[colorindex = 88] { line-color: darken(#fffac8, 4%); }
+[colorindex = 89] { line-color: darken(#fffac8, 6%); }
+[colorindex = 90] { line-color: darken(#fffac8, 8%); }
+[colorindex = 91] { line-color: darken(#fffac8, 10%); }
+[colorindex = 92] { line-color: darken(#fffac8, 12%); }
+[colorindex = 93] { line-color: darken(#fffac8, 14%); }
+[colorindex = 94] { line-color: darken(#fffac8, 16%); }
+[colorindex = 95] { line-color: darken(#fffac8, 18%); }
+[colorindex = 96] { line-color: darken(#fffac8, 20%); }
+[colorindex = 97] { line-color: darken(#fffac8, 22%); }
+[colorindex = 98] { line-color: darken(#fffac8, 24%); }
+[colorindex = 99] { line-color: darken(#fffac8, 26%); }
+[colorindex = 100] { line-color: darken(#fffac8, 28%); }
+[colorindex = 101] { line-color: darken(#fffac8, 30%); }
+[colorindex = 102] { line-color: darken(#fffac8, 32%); }
+[colorindex = 103] { line-color: darken(#fffac8, 34%); }
+[colorindex = 104] { line-color: darken(#fffac8, 36%); }
+[colorindex = 105] { line-color: darken(#fffac8, 38%); }
+[colorindex = 106] { line-color: darken(#fffac8, 40%); }
+[colorindex = 107] { line-color: darken(#fffac8, 42%); }
+[colorindex = 108] { line-color: darken(#fffac8, 44%); }
+[colorindex = 109] { line-color: darken(#fffac8, 46%); }
+[colorindex = 110] { line-color: darken(#fffac8, 48%); }
+[colorindex = 111] { line-color: darken(#fffac8, 50%); }
+[colorindex = 112] { line-color: darken(#fffac8, 52%); }
+[colorindex = 113] { line-color: darken(#fffac8, 54%); }
+[colorindex = 114] { line-color: darken(#fffac8, 56%); }
+[colorindex = 115] { line-color: darken(#fffac8, 58%); }
+[colorindex = 116] { line-color: darken(#fffac8, 60%); }
+[colorindex = 117] { line-color: darken(#fffac8, 62%); }
+[colorindex = 118] { line-color: darken(#fffac8, 64%); }
+[colorindex = 119] { line-color: darken(#fffac8, 66%); }
+[colorindex = 120] { line-color: darken(#fffac8, 68%); }
+[colorindex = 121] { line-color: darken(#fffac8, 70%); }
+[colorindex = 122] { line-color: darken(#fffac8, 72%); }
+[colorindex = 123] { line-color: darken(#fffac8, 74%); }
+[colorindex = 124] { line-color: darken(#fffac8, 76%); }
+[colorindex = 125] { line-color: darken(#fffac8, 78%); }
+[colorindex = 126] { line-color: darken(#fffac8, 80%); }
+[colorindex = 127] { line-color: darken(#fffac8, 82%); }
+[colorindex = 128] { line-color: darken(#fffac8, 84%); }
+[colorindex = 129] { line-color: #aaffc3; }
+[colorindex = 130] { line-color: darken(#aaffc3, 2%); }
+[colorindex = 131] { line-color: darken(#aaffc3, 4%); }
+[colorindex = 132] { line-color: darken(#aaffc3, 6%); }
+[colorindex = 133] { line-color: darken(#aaffc3, 8%); }
+[colorindex = 134] { line-color: darken(#aaffc3, 10%); }
+[colorindex = 135] { line-color: darken(#aaffc3, 12%); }
+[colorindex = 136] { line-color: darken(#aaffc3, 14%); }
+[colorindex = 137] { line-color: darken(#aaffc3, 16%); }
+[colorindex = 138] { line-color: darken(#aaffc3, 18%); }
+[colorindex = 139] { line-color: darken(#aaffc3, 20%); }
+[colorindex = 140] { line-color: darken(#aaffc3, 22%); }
+[colorindex = 141] { line-color: darken(#aaffc3, 24%); }
+[colorindex = 142] { line-color: darken(#aaffc3, 26%); }
+[colorindex = 143] { line-color: darken(#aaffc3, 28%); }
+[colorindex = 144] { line-color: darken(#aaffc3, 30%); }
+[colorindex = 145] { line-color: darken(#aaffc3, 32%); }
+[colorindex = 146] { line-color: darken(#aaffc3, 34%); }
+[colorindex = 147] { line-color: darken(#aaffc3, 36%); }
+[colorindex = 148] { line-color: darken(#aaffc3, 38%); }
+[colorindex = 149] { line-color: darken(#aaffc3, 40%); }
+[colorindex = 150] { line-color: darken(#aaffc3, 42%); }
+[colorindex = 151] { line-color: darken(#aaffc3, 44%); }
+[colorindex = 152] { line-color: darken(#aaffc3, 46%); }
+[colorindex = 153] { line-color: darken(#aaffc3, 48%); }
+[colorindex = 154] { line-color: darken(#aaffc3, 50%); }
+[colorindex = 155] { line-color: darken(#aaffc3, 52%); }
+[colorindex = 156] { line-color: darken(#aaffc3, 54%); }
+[colorindex = 157] { line-color: darken(#aaffc3, 56%); }
+[colorindex = 158] { line-color: darken(#aaffc3, 58%); }
+[colorindex = 159] { line-color: darken(#aaffc3, 60%); }
+[colorindex = 160] { line-color: darken(#aaffc3, 62%); }
+[colorindex = 161] { line-color: darken(#aaffc3, 64%); }
+[colorindex = 162] { line-color: darken(#aaffc3, 66%); }
+[colorindex = 163] { line-color: darken(#aaffc3, 68%); }
+[colorindex = 164] { line-color: darken(#aaffc3, 70%); }
+[colorindex = 165] { line-color: darken(#aaffc3, 72%); }
+[colorindex = 166] { line-color: darken(#aaffc3, 74%); }
+[colorindex = 167] { line-color: darken(#aaffc3, 76%); }
+[colorindex = 168] { line-color: darken(#aaffc3, 78%); }
+[colorindex = 169] { line-color: darken(#aaffc3, 80%); }
+[colorindex = 170] { line-color: darken(#aaffc3, 82%); }
+[colorindex = 171] { line-color: darken(#aaffc3, 84%); }
+[colorindex = 172] { line-color: #e6beff; }
+[colorindex = 173] { line-color: darken(#e6beff, 2%); }
+[colorindex = 174] { line-color: darken(#e6beff, 4%); }
+[colorindex = 175] { line-color: darken(#e6beff, 6%); }
+[colorindex = 176] { line-color: darken(#e6beff, 8%); }
+[colorindex = 177] { line-color: darken(#e6beff, 10%); }
+[colorindex = 178] { line-color: darken(#e6beff, 12%); }
+[colorindex = 179] { line-color: darken(#e6beff, 14%); }
+[colorindex = 180] { line-color: darken(#e6beff, 16%); }
+[colorindex = 181] { line-color: darken(#e6beff, 18%); }
+[colorindex = 182] { line-color: darken(#e6beff, 20%); }
+[colorindex = 183] { line-color: darken(#e6beff, 22%); }
+[colorindex = 184] { line-color: darken(#e6beff, 24%); }
+[colorindex = 185] { line-color: darken(#e6beff, 26%); }
+[colorindex = 186] { line-color: darken(#e6beff, 28%); }
+[colorindex = 187] { line-color: darken(#e6beff, 30%); }
+[colorindex = 188] { line-color: darken(#e6beff, 32%); }
+[colorindex = 189] { line-color: darken(#e6beff, 34%); }
+[colorindex = 190] { line-color: darken(#e6beff, 36%); }
+[colorindex = 191] { line-color: darken(#e6beff, 38%); }
+[colorindex = 192] { line-color: darken(#e6beff, 40%); }
+[colorindex = 193] { line-color: darken(#e6beff, 42%); }
+[colorindex = 194] { line-color: darken(#e6beff, 44%); }
+[colorindex = 195] { line-color: darken(#e6beff, 46%); }
+[colorindex = 196] { line-color: darken(#e6beff, 48%); }
+[colorindex = 197] { line-color: darken(#e6beff, 50%); }
+[colorindex = 198] { line-color: darken(#e6beff, 52%); }
+[colorindex = 199] { line-color: darken(#e6beff, 54%); }
+[colorindex = 200] { line-color: darken(#e6beff, 56%); }
+[colorindex = 201] { line-color: darken(#e6beff, 58%); }
+[colorindex = 202] { line-color: darken(#e6beff, 60%); }
+[colorindex = 203] { line-color: darken(#e6beff, 62%); }
+[colorindex = 204] { line-color: darken(#e6beff, 64%); }
+[colorindex = 205] { line-color: darken(#e6beff, 66%); }
+[colorindex = 206] { line-color: darken(#e6beff, 68%); }
+[colorindex = 207] { line-color: darken(#e6beff, 70%); }
+[colorindex = 208] { line-color: darken(#e6beff, 72%); }
+[colorindex = 209] { line-color: darken(#e6beff, 74%); }
+[colorindex = 210] { line-color: darken(#e6beff, 76%); }
+[colorindex = 211] { line-color: darken(#e6beff, 78%); }
+[colorindex = 212] { line-color: darken(#e6beff, 80%); }
+[colorindex = 213] { line-color: darken(#e6beff, 82%); }
+[colorindex = 214] { line-color: darken(#e6beff, 84%); }
+[colorindex = 215] { line-color: #b2cfff; }
+[colorindex = 216] { line-color: darken(#b2cfff, 2%); }
+[colorindex = 217] { line-color: darken(#b2cfff, 4%); }
+[colorindex = 218] { line-color: darken(#b2cfff, 6%); }
+[colorindex = 219] { line-color: darken(#b2cfff, 8%); }
+[colorindex = 220] { line-color: darken(#b2cfff, 10%); }
+[colorindex = 221] { line-color: darken(#b2cfff, 12%); }
+[colorindex = 222] { line-color: darken(#b2cfff, 14%); }
+[colorindex = 223] { line-color: darken(#b2cfff, 16%); }
+[colorindex = 224] { line-color: darken(#b2cfff, 18%); }
+[colorindex = 225] { line-color: darken(#b2cfff, 20%); }
+[colorindex = 226] { line-color: darken(#b2cfff, 22%); }
+[colorindex = 227] { line-color: darken(#b2cfff, 24%); }
+[colorindex = 228] { line-color: darken(#b2cfff, 26%); }
+[colorindex = 229] { line-color: darken(#b2cfff, 28%); }
+[colorindex = 230] { line-color: darken(#b2cfff, 30%); }
+[colorindex = 231] { line-color: darken(#b2cfff, 32%); }
+[colorindex = 232] { line-color: darken(#b2cfff, 34%); }
+[colorindex = 233] { line-color: darken(#b2cfff, 36%); }
+[colorindex = 234] { line-color: darken(#b2cfff, 38%); }
+[colorindex = 235] { line-color: darken(#b2cfff, 40%); }
+[colorindex = 236] { line-color: darken(#b2cfff, 42%); }
+[colorindex = 237] { line-color: darken(#b2cfff, 44%); }
+[colorindex = 238] { line-color: darken(#b2cfff, 46%); }
+[colorindex = 239] { line-color: darken(#b2cfff, 48%); }
+[colorindex = 240] { line-color: darken(#b2cfff, 50%); }
+[colorindex = 241] { line-color: darken(#b2cfff, 52%); }
+[colorindex = 242] { line-color: darken(#b2cfff, 54%); }
+[colorindex = 243] { line-color: darken(#b2cfff, 56%); }
+[colorindex = 244] { line-color: darken(#b2cfff, 58%); }
+[colorindex = 245] { line-color: darken(#b2cfff, 60%); }
+[colorindex = 246] { line-color: darken(#b2cfff, 62%); }
+[colorindex = 247] { line-color: darken(#b2cfff, 64%); }
+[colorindex = 248] { line-color: darken(#b2cfff, 66%); }
+[colorindex = 249] { line-color: darken(#b2cfff, 68%); }
+[colorindex = 250] { line-color: darken(#b2cfff, 70%); }
+[colorindex = 251] { line-color: darken(#b2cfff, 72%); }
+[colorindex = 252] { line-color: darken(#b2cfff, 74%); }
+[colorindex = 253] { line-color: darken(#b2cfff, 76%); }
+[colorindex = 254] { line-color: darken(#b2cfff, 78%); }
+[colorindex = 255] { line-color: darken(#b2cfff, 80%); }
+[colorindex = 256] { line-color: darken(#b2cfff, 82%); }
+[colorindex = 257] { line-color: darken(#b2cfff, 84%); }
         }
         #tunnels {
           line-color: @residential-tunnel-fill;
@@ -3308,6 +3562,34 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-fill: @standard-halo-fill;
       text-spacing: 760;
       text-clip: false;
+    }
+  }
+
+  [highway = 'track'] {
+    [zoom >= 15] {
+      text-name: "[refs]";
+      text-size: 8;
+      text-dy: 5;
+
+      [zoom >= 16] {
+        text-size: 9;
+        text-dy: 7;
+      }
+      [zoom >= 17] {
+        text-size: 11;
+        text-dy: 9;
+      }
+
+      text-clip: false;
+      text-fill: #222;
+      text-face-name: @book-fonts;
+      text-halo-radius: @standard-halo-radius;
+      text-halo-fill: @standard-halo-fill;
+      text-margin: 10;
+      text-placement: line;
+      text-spacing: 760;
+      text-repeat-distance: @major-highway-text-repeat-distance;
+      text-vertical-alignment: middle;
     }
   }
 
