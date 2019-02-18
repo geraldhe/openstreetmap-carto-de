@@ -1927,6 +1927,24 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [zoom >= 19] { line-width: @residential-width-z19 - 2 * @casing-width-z19; }
         #roads-fill, #bridges {
           line-color: @residential-fill;
+		  [name =~ "B.*"] {
+			line-color: #fabebe;
+		  }
+		  [name =~ "G.*"] {
+			line-color: #ffd8b1;
+		  }
+		  [name =~ "L.*"] {
+			line-color: #fffac8;
+		  }
+		  [name =~ "M.*"] {
+			line-color: #aaffc3;
+		  }
+		  [name =~ "O.*"] {
+			line-color: #e6beff;
+		  }
+		  [name =~ "U.*"] {
+			line-color: #b2cfff;
+		  }
         }
         #tunnels {
           line-color: @residential-tunnel-fill;
