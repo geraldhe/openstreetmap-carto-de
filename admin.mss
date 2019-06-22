@@ -204,20 +204,30 @@ overlapping borders correctly.
   comp-op: darken;
 }
 
-#admin-text[zoom >= 16] {
-  text-name: "[name]";
-  text-face-name: @book-fonts;
-  text-fill: @admin-boundaries;
-  text-halo-radius: @standard-halo-radius;
-  text-halo-fill: @standard-halo-fill;
-  text-largest-bbox-only: false;
-  text-placement: line;
-  text-spacing: 750;
-  text-repeat-distance: 250;
-  text-margin: 10;
-  text-clip: true;
-  text-vertical-alignment: middle;
-  text-dy: -10;
+#admin-text[zoom >= 11][way_pixels >= 48000] {
+  [admin_level = '1'][way_pixels >= 360000],
+  [admin_level = '2'][way_pixels >= 360000],
+  [admin_level = '3'][way_pixels >= 196000],
+  [admin_level = '4'][way_pixels >= 196000],
+  [zoom >= 12][admin_level = '5'],
+  [zoom >= 13][admin_level = '6'],
+  [zoom >= 14][admin_level = '7'],
+  [zoom >= 15][admin_level = '8'],
+  [zoom >= 16] {
+    text-name: "[name]";
+    text-face-name: @book-fonts;
+    text-fill: @admin-boundaries;
+    text-halo-radius: @standard-halo-radius;
+    text-halo-fill: @standard-halo-fill;
+    text-largest-bbox-only: false;
+    text-placement: line;
+    text-spacing: 750;
+    text-repeat-distance: 250;
+    text-margin: 10;
+    text-clip: true;
+    text-vertical-alignment: middle;
+    text-dy: -10;
+  }
 }
 
 #protected-areas-text[zoom >= 13][way_pixels > 192000] {
@@ -241,7 +251,7 @@ overlapping borders correctly.
 }
 
 #protected-areas {
-  [way_pixels > 3000] {
+  [way_pixels > 750] {
     [zoom >= 8][zoom < 10] {
       ::fill {
         opacity: 0.05;

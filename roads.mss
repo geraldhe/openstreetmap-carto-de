@@ -1,11 +1,6 @@
 /* For the main linear features, such as roads and railways. */
 
 /* road colors for german style are hardcoded rather than generated with scripts/generate_road_colors.py */
-@motorway-fill: #eb7d54;
-@trunk-fill: #e27272;
-@primary-fill: #e27272;
-@secondary-fill: #f6e856;
-@tertiary-fill: #ffffb3;
 @residential-fill: #ffffff;
 @unclassified-fill:#ffffff;
 @service-fill: @residential-fill;
@@ -32,17 +27,7 @@
 @motorway-overlay:#f6e856;
 @trunk-overlay:#f6f6f6;
 
-@motorway-low-zoom: @motorway-fill;
-@trunk-low-zoom: @trunk-fill;
-@primary-low-zoom: @primary-fill;
-@secondary-low-zoom: @secondary-fill;
-
 @default-casing: white;
-@motorway-casing: #b95331;
-@trunk-casing: #b93131;
-@primary-casing: #8d4346;
-@secondary-casing: #a37b48;
-@tertiary-casing: #8f8f8f;
 @residential-casing: #bbb;
 @road-casing: @residential-casing;
 @service-casing: @residential-casing;
@@ -63,11 +48,6 @@
 @secondary-construction-fill:@secondary-fill;
 @tertiary-construction-fill:@tertiary-fill;
 @unimportant-construction-fill:@residential-fill;
-
-@motorway-low-zoom-casing: @motorway-fill;
-@trunk-low-zoom-casing: @trunk-fill;
-@primary-low-zoom-casing: @primary-casing;
-@secondary-low-zoom-casing: @secondary-casing;
 
 @unimportant-road: @residential-casing;
 
@@ -353,8 +333,8 @@
 @footway-oneway-arrow-color:      darken(@footway-fill, 35%);
 @steps-oneway-arrow-color:        darken(@steps-fill, 35%);
 @cycleway-oneway-arrow-color:     darken(@cycleway-fill, 25%);
-@track-oneway-arrow-color:        darken(@track-fill, 15%);
-@bridleway-oneway-arrow-color:    darken(@track-fill, 10%);
+@track-oneway-arrow-color:        darken(@track-fill, 10%);
+@bridleway-oneway-arrow-color:    darken(@bridleway-fill, 15%);
 
 // Shield’s line wrap is based on OpenStreetMap data and not on line-wrap-width,
 // but lines are typically rather short, so we use narrow line spacing.
@@ -3221,7 +3201,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
 #bridge-text  {
   [man_made = 'bridge'] {
-    [zoom >= 12][way_pixels > 62.5] {
+    [zoom >= 12][way_pixels > 62.5][way_pixels <= 64000] {
       text-name: "[name]";
       text-size: 10;
       text-wrap-width: 30; // 3 em
@@ -3897,13 +3877,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     [highway = 'road'],
     [highway = 'service'],
     [highway = 'pedestrian'],
-    [highway = 'raceway'],
-    [highway = 'cycleway'],
-    [highway = 'footway'],
-    [highway = 'path'],
-    [highway = 'steps'],
-    [highway = 'track'],
-    [highway = 'bridleway'] {
+    [highway = 'raceway'] {
       [oneway = 'yes'],
       [oneway = '-1'] {
         marker-placement: line;
@@ -3950,32 +3924,62 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [highway = 'raceway'] {
           marker-fill: @raceway-oneway-arrow-color;
         }
-        [highway = 'footway'],
+      }
+    }
+
+    [highway = 'steps'],
+    [highway = 'cycleway'],
+    [highway = 'footway'],
+    [highway = 'path'],
+    [highway = 'track'],
+    [highway = 'bridleway'] {
+      [oneway = 'yes'],
+      [oneway = '-1'] {
+        text-name: "'🠖'";
+        text-size: 15;
+        text-clip: false;
+        text-spacing: 180;
+        text-placement: line;
+        text-halo-fill: @standard-halo-fill;
+        text-halo-radius: 1.5;
+        text-margin: 2;
+        text-dy: 3;
+        text-upright: right;
+        text-vertical-alignment: middle;
+        text-face-name: @book-fonts;
+        [oneway = '-1'] {
+          text-upright: left;
+          text-dy: -3;
+        }
+        [highway = 'footway'] {
+          text-fill: @footway-oneway-arrow-color;
+        }
         [highway = 'path'] {
-          marker-fill: @footway-oneway-arrow-color;
+          text-fill: @footway-oneway-arrow-color;
           [horse = 'designated'] {
-            marker-fill: @bridleway-oneway-arrow-color;
+            text-fill: @bridleway-oneway-arrow-color;
           }
           [bicycle = 'designated'] {
-            marker-fill: @cycleway-oneway-arrow-color;
+            text-fill: @cycleway-oneway-arrow-color;
           }
         }
         [highway = 'steps'] {
-          marker-fill: @steps-oneway-arrow-color;
+          text-fill: @steps-oneway-arrow-color;
         }
         [highway = 'cycleway'] {
-          marker-fill: @cycleway-oneway-arrow-color;
+          text-fill: @cycleway-oneway-arrow-color;
         }
         [highway = 'track'] {
-          marker-fill: @track-oneway-arrow-color;
+          text-fill: @track-oneway-arrow-color;
         }
         [highway = 'bridleway'] {
-          marker-fill: @bridleway-oneway-arrow-color;
+          text-fill: @bridleway-oneway-arrow-color;
         }
       }
     }
   }
 }
+
 #railways-text-name {
   /* Mostly started from z17. */
   [railway = 'rail'],

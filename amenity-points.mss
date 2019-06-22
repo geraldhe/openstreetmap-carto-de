@@ -40,8 +40,7 @@
 @standard-line-spacing-size: -1.5; // -0.15 em
 @standard-font: @book-fonts;
 
-/* Note that .points is also used in water-features.mss */
-.points {
+#amenity-points {
   [feature = 'tourism_alpine_hut'][zoom >= 13],
   [feature = 'tourism_wilderness_hut'][zoom >= 13],
   [feature = 'amenity_shelter'][zoom >= 16] {
@@ -666,30 +665,14 @@
   }
 
   [feature = 'amenity_clinic'][zoom >= 17],
-  [feature = 'healthcare_clinic'][zoom >= 17],
-  [feature = 'amenity_doctors'][zoom >= 17],
-  [feature = 'healthcare_centre'][zoom >= 17] {
+  [feature = 'amenity_doctors'][zoom >= 17] {
     marker-file: url('symbols/amenity/doctors.svg');
     marker-fill: @health-color;
     marker-placement: interior;
     marker-clip: false;
   }
 
-  [feature = 'healthcare_doctor'][zoom >= 17] {
-    [zoom >= 17][zoom < 18] {
-      marker-width: 4;
-      marker-line-width: 0;
-    }
-    [zoom >= 18] {
-      marker-file: url('symbols/amenity/doctors.svg');
-    }
-    marker-fill: @health-color;
-    marker-placement: interior;
-    marker-clip: false;
-  }
-
-  [feature = 'amenity_dentist'][zoom >= 17],
-  [feature = 'healthcare_dentist'][zoom >= 17] {
+  [feature = 'amenity_dentist'][zoom >= 17] {
     [zoom >= 17][zoom < 18] {
       marker-width: 4;
       marker-line-width: 0;
@@ -702,10 +685,8 @@
     marker-clip: false;
   }
 
-  [feature = 'amenity_hospital'][zoom >= 15],
-  [feature = 'healthcare_hospital'][zoom >= 15] {
-    marker-file: url('symbols/amenity/hospital.svg');
-    marker-fill: @health-color;
+  [feature = 'amenity_hospital'][zoom >= 15] {
+    marker-file: url('symbols-de/hospital.svg');
     marker-placement: interior;
     marker-clip: false;
   }
@@ -722,34 +703,6 @@
     marker-fill: @health-color;
     marker-placement: interior;
     marker-clip: false;
-  }
-
-  [feature = 'healthcare_alternative'],
-  [feature = 'healthcare_audiologist'],
-  [feature = 'healthcare_birthing_center'],
-  [feature = 'healthcare_blood_bank'],
-  [feature = 'healthcare_blood_donation'],
-  [feature = 'healthcare_dialysis'],
-  [feature = 'healthcare_laboratory'],
-  [feature = 'healthcare_midwife'],
-  [feature = 'healthcare_occupational_therapist'],
-  [feature = 'healthcare_optometrist'],
-  [feature = 'healthcare_physiotherapist'],
-  [feature = 'healthcare_podiatrist'],
-  [feature = 'healthcare_psychotherapist'],
-  [feature = 'healthcare_rehabilitation'],
-  [feature = 'healthcare_speech_therapist'],
-  [feature = 'healthcare_yes'] {
-    [zoom >= 17] {
-      marker-width: 4;
-      [zoom >= 18] {
-        marker-width: 6;
-      }
-      marker-line-width: 0;
-      marker-placement: interior;
-      marker-clip: false;
-      marker-fill: @health-color;
-    }
   }
 
   [feature = 'amenity_place_of_worship'][zoom >= 16] {
@@ -1815,15 +1768,13 @@
   }
 }
 
-/* Note that .text is also used in water.mss */
+/* Note that these layers are also used in water.mss */
 .text-low-zoom[zoom < 10],
-.text[zoom >= 10] {
-  [feature = 'natural_cape'][zoom >= 4][way_pixels > 3000][way_pixels < 800000],
-  [feature = 'natural_cape'][zoom >= 16][way_pixels < 800000],
-  [feature = 'place_island'][zoom >= 4][way_pixels > 3000][way_pixels < 800000],
-  [feature = 'place_island'][zoom >= 16][way_pixels < 800000],
-  [feature = 'place_islet'][zoom >= 11][way_pixels > 3000][way_pixels < 800000],
-  [feature = 'place_islet'][zoom >= 17][way_pixels < 800000] {
+#text-point[zoom >= 10] {
+  [feature = 'place_island'][zoom >= 4][way_pixels > 3000][way_pixels <= 768000],
+  [feature = 'place_island'][zoom >= 16][way_pixels <= 768000],
+  [feature = 'place_islet'][zoom >= 11][way_pixels > 3000][way_pixels <= 768000],
+  [feature = 'place_islet'][zoom >= 17][way_pixels <= 768000] {
     text-name: "[name]";
     text-fill: #000;
     text-size: @landcover-font-size;
@@ -2093,13 +2044,10 @@
   [feature = 'natural_cape'][zoom >= 14] {
     text-name: "[name]";
     text-fill: #000;
-    text-size: @landcover-font-size;
-    text-wrap-width: @landcover-wrap-width-size;
-    text-line-spacing: @landcover-line-spacing-size;
-    text-size: @landcover-font-size-big;
-    text-wrap-width: @landcover-wrap-width-size-big;
-    text-line-spacing: @landcover-line-spacing-size-big;
-    text-face-name: @oblique-fonts;
+    text-size: @standard-font-size;
+    text-wrap-width: @standard-wrap-width;
+    text-line-spacing: @standard-line-spacing-size;
+    text-face-name: @standard-font;
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;
     text-placement: interior;
@@ -2263,8 +2211,8 @@
   }
 
   [feature = 'leisure_swimming_pool'][is_building = 'no'] {
-    [zoom >= 14][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 14][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2318,8 +2266,8 @@
   [feature = 'leisure_nature_reserve'],
   [feature = 'boundary_aboriginal_lands'],
   [feature = 'boundary_protected_area'] {
-    [zoom >= 8][way_pixels > 3000][is_building = 'no'],
-    [zoom >= 17] {
+    [zoom >= 8][way_pixels > 3000][way_pixels <= 768000][is_building = 'no'],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2357,8 +2305,8 @@
   }
 
   [feature = 'military_danger_area'][is_building = 'no'] {
-    [zoom >= 9][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 9][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2382,8 +2330,8 @@
   }
 
   [feature = 'landuse_garages'][is_building = 'no'] {
-    [zoom >= 13][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 13][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2413,7 +2361,6 @@
   [feature = 'leisure_recreation_ground'],
   [feature = 'landuse_recreation_ground'],
   [feature = 'landuse_village_green'],
-  [feature = 'leisure_common'],
   [feature = 'leisure_garden'],
   [feature = 'landuse_quarry'],
   [feature = 'landuse_vineyard'],
@@ -2429,7 +2376,7 @@
   [feature = 'landuse_farmyard'],
   [feature = 'landuse_farmland'],
   [feature = 'landuse_greenhouse_horticulture'],
-  [feature = 'shop_mall'],
+  [feature = 'shop'][shop = 'mall'],
   [feature = 'landuse_retail'],
   [feature = 'landuse_industrial'],
   [feature = 'landuse_railway'],
@@ -2460,10 +2407,10 @@
   [feature = 'leisure_dog_park'],
   [feature = 'leisure_ice_rink'],
   [feature = 'leisure_pitch'] {
-    [zoom >= 10][way_pixels > 3000][is_building = 'no'],
-    [zoom >= 17][is_building = 'no'],
-    [zoom >= 10][way_pixels > 3000][feature = 'shop_mall'],
-    [zoom >= 17][feature = 'shop_mall'] {
+    [zoom >= 10][way_pixels > 3000][way_pixels <= 768000][is_building = 'no'],
+    [zoom >= 17][way_pixels <= 768000][is_building = 'no'],
+    [zoom >= 10][way_pixels > 3000][way_pixels <= 768000][shop = 'mall'],
+    [zoom >= 17][way_pixels <= 768000][shop = 'mall'] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2492,7 +2439,6 @@
       [feature = 'leisure_recreation_ground'],
       [feature = 'landuse_recreation_ground'],
       [feature = 'landuse_village_green'],
-      [feature = 'leisure_common'],
       [feature = 'leisure_garden'] {
         text-fill: @leisure-green;
       }
@@ -2528,7 +2474,7 @@
       [feature = 'landuse_greenhouse_horticulture'] {
         text-fill: darken(@farmland, 50%);
       }
-      [feature = 'shop_mall'],
+      [feature = 'shop'][shop = 'mall'],
       [feature = 'landuse_retail'] {
         text-fill: darken(@retail, 50%);
       }
@@ -2735,8 +2681,8 @@
   }
 
   [feature = 'leisure_marina'][zoom >= 15] {
-    [zoom >= 10][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 10][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -2891,89 +2837,7 @@
     }
   }
 
-  [feature = 'shop_art'],
-  [feature = 'shop_bag'],
-  [feature = 'shop_bakery'],
-  [feature = 'shop_beauty'],
-  [feature = 'shop_bed'],
-  [feature = 'shop_beverages'],
-  [feature = 'shop_bookmaker'],
-  [feature = 'shop_books'],
-  [feature = 'shop_carpet'],
-  [feature = 'shop_charity'],
-  [feature = 'shop_clothes'],
-  [feature = 'shop_coffee'],
-  [feature = 'shop_computer'],
-  [feature = 'shop_fashion'],
-  [feature = 'shop_convenience'],
-  [feature = 'shop_confectionery'],
-  [feature = 'shop_pastry'],
-  [feature = 'shop_chocolate'],
-  [feature = 'shop_copyshop'],
-  [feature = 'shop_deli'],
-  [feature = 'shop_doityourself'],
-  [feature = 'shop_dry_cleaning'],
-  [feature = 'shop_hardware'],
-  [feature = 'shop_hairdresser'],
-  [feature = 'shop_hifi'],
-  [feature = 'shop_houseware'],
-  [feature = 'shop_ice_cream'],
-  [feature = 'shop_interior_decoration'],
-  [feature = 'shop_butcher'],
-  [feature = 'shop_car'],
-  [feature = 'shop_car_repair'],
-  [feature = 'shop_car_parts'],
-  [feature = 'shop_cosmetics'],
-  [feature = 'shop_dairy'],
-  [feature = 'shop_bicycle'],
-  [feature = 'shop_fabric'],
-  [feature = 'shop_farm'],
-  [feature = 'shop_fishmonger'],
-  [feature = 'shop_florist'],
-  [feature = 'shop_garden_centre'],
-  [feature = 'shop_greengrocer'],
-  [feature = 'shop_pet'],
-  [feature = 'shop_photo'],
-  [feature = 'shop_photo_studio'],
-  [feature = 'shop_photography'],
-  [feature = 'shop_shoes'],
-  [feature = 'shop_gift'],
-  [feature = 'shop_electronics'],
-  [feature = 'shop_alcohol'],
-  [feature = 'shop_optician'],
-  [feature = 'shop_outdoor'],
-  [feature = 'shop_perfumery'],
-  [feature = 'shop_furniture'],
-  [feature = 'shop_kiosk'],
-  [feature = 'shop_massage'],
-  [feature = 'shop_medical_supply'],
-  [feature = 'shop_mobile_phone'],
-  [feature = 'shop_motorcycle'],
-  [feature = 'shop_music'],
-  [feature = 'shop_musical_instrument'],
-  [feature = 'shop_newsagent'],
-  [feature = 'shop_jewelry'],
-  [feature = 'shop_jewellery'],
-  [feature = 'shop_laundry'],
-  [feature = 'shop_chemist'],
-  [feature = 'shop_paint'],
-  [feature = 'shop_toys'],
-  [feature = 'shop_travel_agency'],
-  [feature = 'shop_seafood'],
-  [feature = 'shop_second_hand'],
-  [feature = 'shop_sports'],
-  [feature = 'shop_stationery'],
-  [feature = 'shop_tobacco'],
-  [feature = 'shop_tea'],
-  [feature = 'shop_ticket'],
-  [feature = 'shop_trade'],
-  [feature = 'shop_tyres'],
-  [feature = 'shop_variety_store'],
-  [feature = 'shop_video'],
-  [feature = 'shop_video_games'],
-  [feature = 'shop_wholesale'],
-  [feature = 'shop_wine'],
-  [feature = 'shop_other'] {
+  [feature = 'shop'][shop != 'mall'] {
     [way_pixels > 3000][zoom >= 17],
     [zoom >= 18] {
       text-name: "[name]";
@@ -2986,10 +2850,10 @@
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: rgba(255, 255, 255, 0.6);
       text-placement: interior;
-      [feature = 'shop_car_repair'] {
+      [shop = 'car_repair'] {
         text-fill: @amenity-brown;
       }
-      [feature = 'shop_massage'] {
+      [shop = 'massage'] {
         text-fill: @leisure-green;
       }
     }
@@ -3114,8 +2978,8 @@
   [feature = 'power_generator'][is_building = 'no']["generator:source" != 'wind'][zoom >= 10],
   [feature = 'power_sub_station'][is_building = 'no'][zoom >= 13],
   [feature = 'power_substation'][is_building = 'no'][zoom >= 13]{
-    [way_pixels > 3000],
-    [zoom >= 17] {
+    [way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -3142,8 +3006,8 @@
   [feature = 'natural_shingle'][zoom >= 9],
   [feature = 'natural_bare_rock'],
   [feature = 'natural_sand'] {
-    [zoom >= 8][way_pixels > 3000][is_building = 'no'],
-    [zoom >= 17][is_building = 'no'] {
+    [zoom >= 8][way_pixels > 3000][way_pixels <= 768000][is_building = 'no'],
+    [zoom >= 17][way_pixels <= 768000][is_building = 'no'] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -3174,8 +3038,8 @@
   }
 
   [feature = 'aeroway_apron'][is_building = 'no'] {
-    [zoom >= 10][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 10][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -3200,8 +3064,8 @@
 
   [feature = 'highway_services'][is_building = 'no'],
   [feature = 'highway_rest_area'][is_building = 'no'] {
-    [zoom >= 10][way_pixels > 3000],
-    [zoom >= 17] {
+    [zoom >= 10][way_pixels > 3000][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -3225,9 +3089,9 @@
   }
 
   [feature = 'natural_glacier'][is_building = 'no'] {
-    [zoom >= 8][way_pixels > 10000],
-    [zoom >= 10][way_pixels > 750],
-    [zoom >= 17] {
+    [zoom >= 8][way_pixels > 10000][way_pixels <= 768000],
+    [zoom >= 10][way_pixels > 750][way_pixels <= 768000],
+    [zoom >= 17][way_pixels <= 768000] {
       text-name: "[name]";
       text-size: @landcover-font-size;
       text-wrap-width: @landcover-wrap-width-size;
@@ -3263,26 +3127,21 @@
     text-placement: interior;
   }
 
-  [feature = 'aeroway_aerodrome'][zoom < 14] {
-    [zoom >= 10][aeroway_class = 'INT-major'],
-    [zoom >= 13][aeroway_class = 'INT-minor'] {
-      text-name: "[name]";
-      text-size: @standard-font-size;
-      text-wrap-width: @standard-wrap-width;
-      text-line-spacing: @standard-line-spacing-size;
-      text-fill: darken(@airtransport, 15%);
-      text-dy: -10;
-      text-face-name: @oblique-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-placement: interior;
-      text-wrap-width: @standard-wrap-width;
-      [aeroway_class = 'INT-major'] {
-        text-name: "[name_and_iata]";
-      }
-    }
+  [feature = 'aeroway_aerodrome']['access' != 'private']['icao' != null]['iata' != null][zoom >= 10][zoom < 14],
+  [feature = 'aeroway_aerodrome'][zoom >= 11][zoom < 14],
+  [feature = 'amenity_ferry_terminal'][zoom >= 15] {
+    text-name: "[name_and_iata]";
+    text-size: @standard-font-size;
+    text-wrap-width: @standard-wrap-width;
+    text-line-spacing: @standard-line-spacing-size;
+    text-fill: darken(@airtransport, 15%);
+    text-dy: 10;
+    text-face-name: @oblique-fonts;
+    text-halo-radius: @standard-halo-radius;
+    text-halo-fill: @standard-halo-fill;
+    text-placement: interior;
   }
-
+  
   [feature = 'amenity_hunting_stand'][zoom >= 17] {
     text-name: "[name]";
     text-size: @standard-font-size;

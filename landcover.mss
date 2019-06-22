@@ -1,6 +1,6 @@
 // --- Parks, woods, other green things ---
 
-@grass: #cdebb0;        // Lch(90,32,128) also grassland, meadow, common, village_green, garden
+@grass: #cdebb0;        // Lch(90,32,128) also grassland, meadow, village_green, garden, allotments
 @scrub: #c8d7ab;        // Lch(84,24,122)
 @forest: #add19e;       // Lch(80,30,135)
 @forest-text: #46673b;  // Lch(40,30,135)
@@ -67,6 +67,8 @@
 @track: @pitch;
 @stadium: @leisure; // also sports_centre
 @golf_course: #b5e3b5;
+@sport-surface-clay: lighten(#cc7e66, 20%);
+@sport-surface-grass: @pitch;
 
 #landcover-low-zoom[zoom < 10],
 #landcover[zoom >= 10] {
@@ -347,9 +349,8 @@
 
   [feature = 'natural_grassland'][zoom >= 5],
   [feature = 'landuse_meadow'][zoom >= 5],
-  [feature = 'landuse_grass'][zoom >= 10],
-  [feature = 'landuse_village_green'][zoom >= 10],
-  [feature = 'leisure_common'][zoom >= 10] {
+  [feature = 'landuse_grass'][zoom >= 5],
+  [feature = 'landuse_village_green'][zoom >= 5] {
     polygon-fill: @grass;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -684,6 +685,15 @@
     [zoom >= 15] {
       line-width: 0.5;
       line-color: desaturate(darken(@pitch, 20%), 10%);
+      [surface='clay']::surface {
+        polygon-fill: @sport-surface-clay;
+        line-color: saturate(darken(@sport-surface-clay, 20%), 10%);
+      }
+      /* this is currently the same as the generic ccolor */
+      [surface='grass']::surface {
+        polygon-fill: @sport-surface-grass;
+        line-color: saturate(darken(@sport-surface-grass, 20%), 10%); 
+      }
     }
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -708,6 +718,7 @@
 }
 
 #landcover-area-symbols {
+
   ::first {
     [natural = 'mud'],
     [int_wetland = 'tidalflat'] {
@@ -718,6 +729,7 @@
       }
     }
   }
+
   [natural = 'sand'][zoom >= 5] {
     polygon-pattern-file: url('symbols/beach.png');
     polygon-pattern-alignment: global;
