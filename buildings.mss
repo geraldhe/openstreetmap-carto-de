@@ -126,7 +126,7 @@
       [colorindex = 105] { polygon-fill: darken(#fffac8, 38%); }
       [colorindex = 106] { polygon-fill: darken(#fffac8, 40%); }
       [colorindex = 107] { polygon-fill: darken(#fffac8, 42%); }
-      [colorindex = 108] { polygon-fill: darken(#fffac8, 44%); }
+      [colorindex = 108] { polygon-fill: grey; }
       [colorindex = 109] { polygon-fill: darken(#fffac8, 46%); }
       [colorindex = 110] { polygon-fill: darken(#fffac8, 48%); }
       [colorindex = 111] { polygon-fill: darken(#fffac8, 50%); }

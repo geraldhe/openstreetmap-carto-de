@@ -358,15 +358,15 @@
 
 // Shield’s line wrap is based on OpenStreetMap data and not on line-wrap-width,
 // but lines are typically rather short, so we use narrow line spacing.
-@shield-size: 10;
+@shield-size: 7;
 @shield-line-spacing: -1.50; // -0.15 em
-@shield-size-z16: 11;
+@shield-size-z16: 8;
 @shield-line-spacing-z16: -1.65; // -0.15 em
-@shield-size-z18: 12;
+@shield-size-z18: 9;
 @shield-line-spacing-z18: -1.80; // -0.15 em
-@shield-spacing: 760;
+@shield-spacing: 710;
 @shield-repeat-distance: 400;
-@shield-margin: 40;
+@shield-margin: 30;
 @shield-font: @book-fonts;
 @shield-clip: false;
 @shield-motorway-font: @bold-fonts;
@@ -1941,6 +1941,30 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [zoom >= 19] { line-width: @residential-width-z19 - 2 * @casing-width-z19; }
         #roads-fill, #bridges {
           line-color: @residential-fill;
+        }
+        #tunnels {
+          line-color: @residential-tunnel-fill;
+        }
+        #bridges {
+          line-width: @residential-width-z13 - 2 * @bridge-casing-width-z13;
+          [zoom >= 14] { line-width: @residential-width-z14 - 2 * @bridge-casing-width-z14; }
+          [zoom >= 15] { line-width: @residential-width-z15 - 2 * @bridge-casing-width-z15; }
+          [zoom >= 16] { line-width: @residential-width-z16 - 2 * @bridge-casing-width-z16; }
+          [zoom >= 17] { line-width: @residential-width-z17 - 2 * @bridge-casing-width-z17; }
+          [zoom >= 18] { line-width: @residential-width-z18 - 2 * @bridge-casing-width-z18; }
+          [zoom >= 19] { line-width: @residential-width-z19 - 2 * @bridge-casing-width-z19; }
+        }
+        line-cap: round;
+        line-join: round;
+      }
+    }
+
+    [feature = 'highway_secondary'],
+    [feature = 'highway_tertiary'],
+    [feature = 'highway_residential'],
+    [feature = 'highway_unclassified'] {
+        [zoom >= 13] {
+            #roads-fill, #bridges {
 [colorindex = 0] { line-color: #fabebe; }
 [colorindex = 1] { line-color: darken(#fabebe, 2%); }
 [colorindex = 2] { line-color: darken(#fabebe, 4%); }
@@ -2049,7 +2073,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 [colorindex = 105] { line-color: darken(#fffac8, 38%); }
 [colorindex = 106] { line-color: darken(#fffac8, 40%); }
 [colorindex = 107] { line-color: darken(#fffac8, 42%); }
-[colorindex = 108] { line-color: darken(#fffac8, 44%); }
+[colorindex = 108] { line-color: grey; }
 [colorindex = 109] { line-color: darken(#fffac8, 46%); }
 [colorindex = 110] { line-color: darken(#fffac8, 48%); }
 [colorindex = 111] { line-color: darken(#fffac8, 50%); }
@@ -2199,22 +2223,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 [colorindex = 255] { line-color: darken(#b2cfff, 80%); }
 [colorindex = 256] { line-color: darken(#b2cfff, 82%); }
 [colorindex = 257] { line-color: darken(#b2cfff, 84%); }
+            }
         }
-        #tunnels {
-          line-color: @residential-tunnel-fill;
-        }
-        #bridges {
-          line-width: @residential-width-z13 - 2 * @bridge-casing-width-z13;
-          [zoom >= 14] { line-width: @residential-width-z14 - 2 * @bridge-casing-width-z14; }
-          [zoom >= 15] { line-width: @residential-width-z15 - 2 * @bridge-casing-width-z15; }
-          [zoom >= 16] { line-width: @residential-width-z16 - 2 * @bridge-casing-width-z16; }
-          [zoom >= 17] { line-width: @residential-width-z17 - 2 * @bridge-casing-width-z17; }
-          [zoom >= 18] { line-width: @residential-width-z18 - 2 * @bridge-casing-width-z18; }
-          [zoom >= 19] { line-width: @residential-width-z19 - 2 * @bridge-casing-width-z19; }
-        }
-        line-cap: round;
-        line-join: round;
-      }
     }
 
     [feature = 'highway_living_street'] {
@@ -3657,7 +3667,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-placement: line;
       text-face-name: @book-fonts;
       text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @secondary-fill;
+      text-halo-fill: @halo-color-for-minor-road; // RK: weißes Halo für secondary-streets, da Einfärbung je nach Name
       text-repeat-distance: @major-highway-text-repeat-distance;
     }
     [zoom >= 14] {
