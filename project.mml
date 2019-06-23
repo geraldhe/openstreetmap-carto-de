@@ -91,7 +91,7 @@ Layer:
       table: |-
         (SELECT
             way, name, religion, way_pixels, is_building, surface,
-            COALESCE(aeroway, amenity, wetland, power, landuse, leisure, man_made, "natural", tourism, highway, railway) AS feature
+            COALESCE(aeroway, amenity, wetland, landuse, leisure, man_made, "natural", tourism, highway, railway) AS feature
           FROM (SELECT
               way, localized_name_second AS name,
               surface,
@@ -2401,7 +2401,7 @@ Layer:
         (SELECT
             localized_name_second as name,
             ST_PointOnSurface(way) AS way,
-            hashtext(localized_name_second) % 128 + 127 AS colorindex
+            hashtext(localized_name_second) % 128 + 127 AS colorindex,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
           WHERE way && !bbox!
