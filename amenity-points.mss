@@ -35,8 +35,8 @@
 @landcover-line-spacing-size-bigger: -2.25; // -0.15 em
 @landcover-face-name: @oblique-fonts;
 
-@standard-font-size: 10;
-@standard-wrap-width: 30; // 3 em
+@standard-font-size: 9;
+@standard-wrap-width: 25; // 3 em
 @standard-line-spacing-size: -1.5; // -0.15 em
 @standard-font: @book-fonts;
 

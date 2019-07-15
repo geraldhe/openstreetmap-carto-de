@@ -1,6 +1,6 @@
 /* Features related to (postal) adresses: */
 
-@address-color: #666;
+@address-color: #222;
 
 #interpolation {
   [zoom >= 17] {
@@ -11,7 +11,7 @@
 }
 
 #addresses {
-  [zoom >= 17] {
+  [zoom >= 16] {
     text-name: "[addr_housename]";
     ["addr_housenumber" != null] {
       text-name: [addr_housenumber];
@@ -30,10 +30,14 @@
     text-fill: @address-color;
     text-halo-radius: @standard-halo-radius;
     text-halo-fill: @standard-halo-fill;
-    text-size: 10;
+    text-size: 7;
     text-wrap-width: 30; // 3.0 em
     text-line-spacing: -1.5; // -0.15 em
     text-margin: 3; // 0.3 em
+	text-allow-overlap: true;
+	[zoom >= 17] {
+		text-size: 10;
+	}
     [zoom >= 18] {
       text-halo-radius: @standard-halo-radius * 1.25;
       ["addr_unit" != null]["addr_housenumber" = null] {
