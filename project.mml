@@ -677,7 +677,7 @@ Layer:
             aerialway,
             tags->'public_transport' as public_transport,
             tags->'addr:street' as addr_street,
-            getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place', '')) % 128 + 127) AS color
+            COALESCE(getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place'))), 'unknown') AS color
           FROM planet_osm_polygon
           WHERE building IS NOT NULL
             AND building != 'no'
@@ -745,7 +745,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE (tunnel = 'yes' OR tunnel = 'building_passage' OR covered = 'yes')
                 AND highway IS NOT NULL -- end of road select
@@ -775,7 +775,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE (tunnel = 'yes' OR tunnel = 'building_passage' OR covered = 'yes')
                 AND (railway NOT IN ('platform') AND railway IS NOT NULL) -- end of rail select
@@ -1045,7 +1045,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE (tunnel IS NULL OR NOT tunnel IN ('yes', 'building_passage'))
                 AND (covered IS NULL OR NOT covered = 'yes')
@@ -1078,7 +1078,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 NULL as name,
-                getcolor(HASHTEXT('') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(NULL)), 'unknown') AS color
               FROM planet_osm_line
               WHERE (tunnel IS NULL OR NOT tunnel IN ('yes', 'building_passage'))
                 AND (covered IS NULL OR NOT covered = 'yes')
@@ -1185,7 +1185,7 @@ Layer:
                 osm_id,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE (tunnel IS NULL OR NOT tunnel IN ('yes', 'building_passage'))
                 AND (covered IS NULL OR NOT covered = 'yes')
@@ -1219,7 +1219,7 @@ Layer:
                 osm_id,
                 z_order,
                 NULL AS name,
-                getcolor(HASHTEXT('') % 128 + 127) AS color
+                'unknown' AS color
               FROM planet_osm_line
               WHERE (tunnel IS NULL OR NOT tunnel IN ('yes', 'building_passage'))
                 AND (covered IS NULL OR NOT covered = 'yes')
@@ -1398,7 +1398,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE bridge IN ('yes', 'boardwalk', 'cantilever', 'covered', 'low_water_crossing', 'movable', 'trestle', 'viaduct')
                 AND highway IS NOT NULL -- end of road select
@@ -1429,7 +1429,7 @@ Layer:
                 COALESCE(layer,0) AS layernotnull,
                 z_order,
                 tags->'name' as name,
-                getcolor(HASHTEXT(tags->'name') % 128 + 127) AS color
+                COALESCE(getcolor(HASHTEXT(tags->'name')), 'unknown') AS color
               FROM planet_osm_line
               WHERE bridge IN ('yes', 'boardwalk', 'cantilever', 'covered', 'low_water_crossing', 'movable', 'trestle', 'viaduct')
                 AND railway IS NOT NULL -- end of rail select
@@ -1838,10 +1838,10 @@ Layer:
                 ) AS name,
               COALESCE(
                 'aeroway_' || CASE WHEN aeroway IN ('gate', 'apron', 'helipad', 'aerodrome') THEN aeroway ELSE NULL END,
-                'tourism_' || CASE WHEN tourism IN ('alpine_hut', 'apartment', 'artwork', 'camp_site', 'caravan_site', 'chalet', 'gallery', 'guest_house',
-                                                    'hostel', 'hotel', 'motel', 'museum', 'picnic_site', 'theme_park', 'wilderness_hut',
+                'tourism_' || CASE WHEN tourism IN ('alpine_hut', 'apartment', 'artwork', 'chalet', 'gallery',
+                                                    'hostel', 'hotel', 'motel', 'museum', 'theme_park',
                                                     'zoo') THEN tourism ELSE NULL END,
-                'amenity_' || CASE WHEN amenity IN ('arts_centre', 'atm', 'bank', 'bar', 'bbq', 'bicycle_parking', 'bicycle_rental',
+                'amenity_' || CASE WHEN amenity IN ('arts_centre', 'bar', 'bbq', 'bicycle_parking', 'bicycle_rental',
                                                     'bicycle_repair_station','biergarten', 'boat_rental', 'bureau_de_change', 'bus_station', 'cafe',
                                                     'car_rental', 'car_wash', 'casino', 'charging_station', 'childcare', 'cinema', 'clinic', 'college',
                                                     'community_centre', 'courthouse', 'dentist', 'doctors', 'drinking_water', 'driving_school', 'embassy',
@@ -1883,7 +1883,7 @@ Layer:
                 'historic_' || CASE WHEN historic IN ('memorial', 'monument', 'archaeological_site', 'fort', 'castle', 'manor', 'city_gate')
                               THEN historic ELSE NULL END,
                 'military_'|| CASE WHEN military IN ('danger_area', 'bunker') THEN military ELSE NULL END,
-                'highway_' || CASE WHEN highway IN ('services', 'rest_area', 'bus_stop', 'elevator', 'traffic_signals') THEN highway ELSE NULL END,
+                'highway_' || CASE WHEN highway IN ('services', 'rest_area', 'elevator', 'traffic_signals') THEN highway ELSE NULL END,
                 'highway_'|| CASE WHEN tags @> 'ford=>yes' OR tags @> 'ford=>stepping_stones' AND way_area IS NULL THEN 'ford' ELSE NULL END,
                 'boundary_' || CASE WHEN boundary IN ('aboriginal_lands', 'national_park')
                                           OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6','7','24','97','98','99'))
@@ -2401,7 +2401,7 @@ Layer:
         (SELECT
             localized_name_second as name,
             ST_PointOnSurface(way) AS way,
-            getcolor(HASHTEXT(localized_name_second) % 128 + 127) AS color,
+            COALESCE(getcolor(HASHTEXT(localized_name_second)), 'unknown') AS color,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
           FROM planet_osm_polygon
           WHERE way && !bbox!
@@ -2437,7 +2437,7 @@ Layer:
             "addr:housename" AS addr_housename,
             tags->'addr:unit' AS addr_unit,
             way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
-            getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place', '')) % 128 + 127) AS color
+            COALESCE(getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place'))), 'unknown') AS color
           FROM planet_osm_polygon
           WHERE (("addr:housenumber" IS NOT NULL) OR ("addr:housename" IS NOT NULL) OR ((tags->'addr:unit') IS NOT NULL))
             AND building IS NOT NULL
@@ -2448,7 +2448,7 @@ Layer:
             "addr:housename" AS addr_housename,
             tags->'addr:unit' AS addr_unit,
             NULL AS way_pixels,
-            getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place', '')) % 128 + 127) AS color
+            COALESCE(getcolor(HASHTEXT(COALESCE(tags->'addr:street', tags->'addr:place'))), 'unknown') AS color
           FROM planet_osm_point
           WHERE ("addr:housenumber" IS NOT NULL) OR ("addr:housename" IS NOT NULL) OR ((tags->'addr:unit') IS NOT NULL)
           ORDER BY way_pixels DESC NULLS LAST
