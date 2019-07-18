@@ -1949,7 +1949,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     [feature = 'highway_unclassified'] {
         [zoom >= 13] {
             #roads-fill, #bridges {
-                [color != 'unknown'] { line-color: [color]; }
+                [color != null] { line-color: [color]; }
             }
         }
     }
@@ -3300,7 +3300,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-min-distance: 40;
       text-halo-radius: 2;
       text-halo-fill: @standard-halo-fill;
-      text-spacing: 760;
+      text-spacing: 200;
       text-clip: false;
     }
   }
@@ -3327,7 +3327,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-fill: @standard-halo-fill;
       text-margin: 10;
       text-placement: line;
-      text-spacing: 760;
+      text-spacing: 350;
       text-repeat-distance: @major-highway-text-repeat-distance;
       text-vertical-alignment: middle;
     }
@@ -3481,7 +3481,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
     [zoom >= 17] {
       text-size: 11;
-      text-spacing: 400;
+      text-spacing: 300;
     }
     [zoom >= 19] {
       text-size: 12;
