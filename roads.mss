@@ -338,11 +338,11 @@
 
 // Shield’s line wrap is based on OpenStreetMap data and not on line-wrap-width,
 // but lines are typically rather short, so we use narrow line spacing.
-@shield-size: 7;
+@shield-size: 5; // RK: kleinere Schriftgröße
 @shield-line-spacing: -1.50; // -0.15 em
-@shield-size-z16: 8;
+@shield-size-z16: 6; // RK: kleinere Schriftgröße
 @shield-line-spacing-z16: -1.65; // -0.15 em
-@shield-size-z18: 9;
+@shield-size-z18: 7; // RK: kleinere Schriftgröße
 @shield-line-spacing-z18: -1.80; // -0.15 em
 @shield-spacing: 710;
 @shield-repeat-distance: 400;
@@ -3224,6 +3224,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       shield-face-name: @shield-font;
       shield-clip: @shield-clip;
       shield-min-padding: 31;
+      shield-transform: scale(0.6, 0.6); // RK: Schilder kleiner skalieren
 
       [highway = 'motorway'] {
         shield-fill: @motorway-shield;
@@ -3256,7 +3257,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
           shield-file: url("symbols-de/shields/primary_[width]x[height]_z18.svg");
         }
       }
-      [highway = 'secondary'] { // RK: z.B. Perg L1423
+      [highway = 'secondary'] { // RK: z.B. Perg L1423, Gusen L569
         shield-fill: @secondary-shield;
         shield-file: url("symbols-de/shields/secondary_[width]x[height].svg");
         [zoom >= 16] {
