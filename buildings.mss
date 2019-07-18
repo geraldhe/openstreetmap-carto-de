@@ -18,9 +18,8 @@
     polygon-fill: @building-low-zoom;
     polygon-clip: false;
     [zoom >= 15] {
-      //polygon-fill: @building-fill;
-      //[color >= 0] { polygon-fill: [color]; }
-      polygon-fill: [color];
+      polygon-fill: @building-fill;
+      [color != 'unknown'] { polygon-fill: [color]; }
       line-color: @building-line;
       line-width: .75;
       line-clip: false;
