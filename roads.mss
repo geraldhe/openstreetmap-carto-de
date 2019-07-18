@@ -344,9 +344,9 @@
 @shield-line-spacing-z16: -1.65; // -0.15 em
 @shield-size-z18: 7; // RK: kleinere Schriftgröße
 @shield-line-spacing-z18: -1.80; // -0.15 em
-@shield-spacing: 710;
+@shield-spacing: 760;
 @shield-repeat-distance: 400;
-@shield-margin: 30;
+@shield-margin: 40;
 @shield-font: @book-fonts;
 @shield-clip: false;
 @shield-motorway-font: @bold-fonts;
@@ -3173,6 +3173,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     shield-face-name: @shield-font;
     shield-clip: @shield-clip;
     shield-min-padding: 31;
+    shield-transform: scale(0.6, 0.6); // RK: Schilder kleiner skalieren
 
     [highway = 'motorway'] {
       shield-face-name: @shield-motorway-font;
@@ -3386,7 +3387,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
   }
   [highway = 'secondary'],
-  [highway = 'construction'][construction = 'secondary'] {
+  [highway = 'construction'][construction = 'secondary'] { // RK z.B. GG: Linzer Straße (B3c)
     [zoom >= 13] {
       text-name: "[name]";
       text-size: 8;
@@ -3413,7 +3414,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
   }
   [highway = 'tertiary'],
-  [highway = 'construction'][construction = 'tertiary'] {
+  [highway = 'construction'][construction = 'tertiary'] { // RK z.B. GG: Gusentalstr.
     [zoom >= 14] {
       text-name: "[name]";
       text-size: 9;
@@ -3425,6 +3426,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @tertiary-fill;
       text-repeat-distance: @major-highway-text-repeat-distance;
+      text-max-char-angle-delta: 120; // RK Sonst werden Straßen mit "Knick" nicht beschriftet
     }
     [zoom >= 17] {
       text-size: 11;
@@ -3459,7 +3461,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [highway = 'road'],
   [highway = 'construction'][construction = 'residential'],
   [highway = 'construction'][construction = 'unclassified'],
-  [highway = 'construction'][construction = 'road'] {
+  [highway = 'construction'][construction = 'road'] { // RK z.B. GG: Am Kregel, Sandgasse
     [zoom >= 15] {
       text-name: "[name]";
       text-size: 8;
@@ -3471,6 +3473,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-fill: @residential-fill;
       text-face-name: @book-fonts;
       text-repeat-distance: @minor-highway-text-repeat-distance;
+      text-max-char-angle-delta: 120; // RK Sonst wird z.B. Am Kregl in GG nicht beschriftet
       [highway = 'unclassified'] { text-repeat-distance: @major-highway-text-repeat-distance;}
     }
     [zoom >= 16] {
@@ -3489,15 +3492,16 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [highway = 'raceway'],
   [highway = 'service'],
   [highway = 'construction'][construction = 'raceway'],
-  [highway = 'construction'][construction = 'service'] {
+  [highway = 'construction'][construction = 'service'] { // RK z.B. GG: Am Kögel
     [zoom >= 16] {
       text-name: "[name]";
-      text-size: 9;
+      text-size: 6;
       text-fill: black;
       text-spacing: 300;
       text-clip: false;
       text-placement: line;
       text-halo-radius: @standard-halo-radius;
+      text-max-char-angle-delta: 120; // RK Sonst werden Straßen mit "Knick" nicht beschriftet
       [highway = 'raceway'] { text-halo-fill: @raceway-fill; }
       [highway = 'service'] { text-halo-fill: @service-fill; }
       text-face-name: @book-fonts;

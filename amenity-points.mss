@@ -308,8 +308,9 @@
   }
 
   [feature = 'amenity_fire_station'][zoom >= 16] {
-    marker-file: url('symbols/amenity/firestation.svg');
-    marker-fill: @public-service;
+    marker-file: url('symbols-de/firestation.svg'); // RK Anpassung Logo FF
+    marker-width: 9;
+    marker-height: 9;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -710,6 +711,8 @@
     marker-fill: @religious-icon;
     marker-placement: interior;
     marker-clip: false;
+    marker-width: 9.0;
+    marker-height: 9.0;
     [religion = 'christian'] {
       marker-file: url('symbols/religion/christian.svg');
       [denomination = 'jehovahs_witness']{
@@ -803,6 +806,22 @@
 
   [feature = 'amenity_telephone'][zoom >= 17] {
     marker-file: url('symbols/amenity/telephone.svg');
+    marker-fill: @amenity-brown;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+/*
+  [feature = 'emergency_ambulance'] {
+    marker-file: url('symbols-de/firestation.svg'); // RK RK-Stellen einzeichnen
+    marker-width: 10;
+    marker-height: 12.5;
+    marker-fill: @public-service;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+*/
+  [feature = 'emergency_ambulance'] {
+    marker-file: url('symbols/amenity/emergency_phone.svg');
     marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
