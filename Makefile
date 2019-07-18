@@ -11,9 +11,9 @@ all: $(XMLSTYLE) osm-hrb.xml
 $(XMLSTYLE): *.mss project.mml
 ifeq ($(DBSCHEME),upstream)
 	cd contrib/use-upstream-database/; ./replace-tablenames.sh
-	carto -a $(MAPNIK_API) project-mod.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project-mod.mml > $(TEMPFILE)
 else
-	carto -a $(MAPNIK_API) project.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project.mml > $(TEMPFILE)
 endif
 	mv $(TEMPFILE) $@
 
@@ -21,7 +21,7 @@ project-hrb.mml: project.mml
 	sed -e 's/localized_[a-z_]\+/name_hrb/g' project.mml >project-hrb.mml
 
 osm-hrb.xml: *.mss project-hrb.mml
-	carto -a $(MAPNIK_API) project-hrb.mml > $(TEMPFILE)
+	carto -q -a $(MAPNIK_API) project-hrb.mml > $(TEMPFILE)
 	mv $(TEMPFILE) $@
 
 preview-de.png: $(XMLSTYLE)
@@ -146,5 +146,12 @@ test-coast2.png:
 test-lake-ocean.png:
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -o $@ -u /7/114/25.png
 
+pe-test:
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35397/22707.png -o test/am-kregel-mariengrube.png
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35397/22706.png -o test/gg-einsatzzentrum-links.png
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35398/22706.png -o test/gg-einsatzzentrum-rechts.png
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35402/22712.png -o test/ff-langenstein.png
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35432/22714.png -o test/pe-einsatzzentrum.png
+
 clean:
-	rm -f project-de.* $(XMLSTYLE) test-*.png
+	rm -f project-de.* $(XMLSTYLE) test-*.png test/*

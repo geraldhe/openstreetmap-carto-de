@@ -80,13 +80,14 @@ if __name__ == "__main__":
   import mapnik
   custom_fonts_dir = '/etc/mapnik-osm-data/fonts/'
   mapnik.register_fonts(custom_fonts_dir)
-  m = mapnik.Map(256, 256)
+  scale = 2
+  m = mapnik.Map(256*scale, 256*scale)
   mapnik.load_map(m, mapfile)
   bba=TileToBBox(x,y,z)
   bbox=mapnik.Box2d(bba[0],bba[1],bba[2],bba[3])
   m.zoom_to_box(bbox)
-  im = mapnik.Image(256, 256)
-  mapnik.render(m, im)
+  im = mapnik.Image(256*scale, 256*scale)
+  mapnik.render(m, im, scale)
   if args.outputfile:
     ofile=args.outputfile
   else:
