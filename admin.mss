@@ -147,6 +147,8 @@ overlapping borders correctly.
     line-dasharray: 6,3,2,3,2,3;
     line-clip: false;
   }
+// RK START: Bezirks- und Gemeindegrenzen entfernen (Linien)
+/*
   [admin_level = '6'][zoom >= 11] {
     background/line-join: bevel;
     background/line-color: white;
@@ -161,6 +163,7 @@ overlapping borders correctly.
     line-dasharray: 6,3,2,3;
     line-clip: false;
   }
+
   [admin_level = '7'],
   [admin_level = '8'] {
     [zoom >= 12] {
@@ -178,6 +181,8 @@ overlapping borders correctly.
       line-clip: false;
     }
   }
+*/
+// RK ENDE
   opacity: 0.5;
   comp-op: darken;
 }
@@ -208,12 +213,17 @@ overlapping borders correctly.
   [admin_level = '1'][way_pixels >= 360000],
   [admin_level = '2'][way_pixels >= 360000],
   [admin_level = '3'][way_pixels >= 196000],
-  [admin_level = '4'][way_pixels >= 196000],
+  [admin_level = '4'][way_pixels >= 196000]
+  // RK START: Bezirks- und Gemeindegrenzen entfernen (Text)
+  /*
   [zoom >= 12][admin_level = '5'],
   [zoom >= 13][admin_level = '6'],
   [zoom >= 14][admin_level = '7'],
   [zoom >= 15][admin_level = '8'],
-  [zoom >= 16] {
+  [zoom >= 16]
+  */
+  // RK ENDE
+  {
     text-name: "[name]";
     text-face-name: @book-fonts;
     text-fill: @admin-boundaries;
