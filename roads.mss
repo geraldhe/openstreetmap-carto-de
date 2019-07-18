@@ -1941,14 +1941,15 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       }
     }
 
+    // RK: Straßen nach Namen einfärben (Block eingefügt)
     [feature = 'highway_secondary'],
     [feature = 'highway_tertiary'],
+    [feature = 'highway_service'],
     [feature = 'highway_residential'],
     [feature = 'highway_unclassified'] {
         [zoom >= 13] {
             #roads-fill, #bridges {
-                line-color: [color];
-                // [color >= 0] { line-color: [color]; }
+                [color != 'unknown'] { line-color: [color]; }
             }
         }
     }
@@ -3226,7 +3227,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
       [highway = 'motorway'] {
         shield-fill: @motorway-shield;
-	shield-face-name: @shield-motorway-font;
+        shield-face-name: @shield-motorway-font;
         shield-file: url("symbols-de/shields/motorway_[width]x[height].svg");
         [zoom >= 16] {
           shield-file: url("symbols-de/shields/motorway_[width]x[height]_z16.svg");
@@ -3255,7 +3256,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
           shield-file: url("symbols-de/shields/primary_[width]x[height]_z18.svg");
         }
       }
-      [highway = 'secondary'] {
+      [highway = 'secondary'] { // RK: z.B. Perg L1423
         shield-fill: @secondary-shield;
         shield-file: url("symbols-de/shields/secondary_[width]x[height].svg");
         [zoom >= 16] {
@@ -3265,7 +3266,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
           shield-file: url("symbols-de/shields/secondary_[width]x[height]_z18.svg");
         }
       }
-      [highway = 'tertiary'] {
+      [highway = 'tertiary'] { // RK: z.B. Perg L1423a
         shield-fill: @tertiary-shield;
         shield-file: url("symbols-de/shields/secondary_[width]x[height].svg");
         [zoom >= 16] {
@@ -3279,6 +3280,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   }
 
   [highway = 'unclassified'],
+  [highway = 'service'],
   [highway = 'residential'] {
     [zoom >= 15] {
       text-name: "[refs]";
