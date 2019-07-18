@@ -46,7 +46,7 @@
     }
     [zoom >= 15] {
       marker-width: 9;
-      text-size: 11;
+      text-size: 6; // RK: Schriftgröße Bahnhof
       text-wrap-width: 33; // 3 em
       text-line-spacing: -1.65; // -0.15 em
       text-dy: 10;
@@ -67,7 +67,7 @@
     [zoom >= 15] {
       text-name: "[name]";
       text-face-name: @bold-fonts;
-      text-size: @standard-font-size;
+      text-size: 6; // RK: Schriftgröße Haltestelle
       text-fill: @station-text;
       text-dy: 10;
       text-halo-radius: @standard-halo-radius * 1.5;
