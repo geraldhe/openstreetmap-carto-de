@@ -24,3 +24,4 @@ test*.png
 *.pyc   
 **/*.pyc
 test-*
+test/
