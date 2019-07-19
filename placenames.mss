@@ -423,7 +423,7 @@
         text-line-spacing: -0.8; // -0.08 em
         text-margin: 7.0; // 0.7 em
       }
-      [zoom >= 16] {
+      [zoom >= 16] {  // RK: hier Weidegut, Ruhstetten, Breitenbruck, ...
         text-size: 12;
         text-wrap-width: 60; // 5.0 em
         text-line-spacing: -0.60; // -0.05 em

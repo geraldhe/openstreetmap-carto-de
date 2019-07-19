@@ -8,5 +8,5 @@ Map {
 @ocean-color: #b9d3dc;     // Lch(83,10,227)
 @river-color: #97c9d8;     // Lch(78,18,225)
 
-@standard-halo-radius: 1;
+@standard-halo-radius: 0.9;
 @standard-halo-fill: rgba(255,255,255,0.6);

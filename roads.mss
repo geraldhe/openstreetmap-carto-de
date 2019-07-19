@@ -1944,8 +1944,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     // RK: Straßen nach Namen einfärben (Block eingefügt)
     [feature = 'highway_secondary'],
     [feature = 'highway_tertiary'],
-    [feature = 'highway_service'],
     [feature = 'highway_residential'],
+    [feature = 'highway_service'],
     [feature = 'highway_unclassified'] {
         [zoom >= 13] {
             #roads-fill, #bridges {
@@ -3295,7 +3295,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         text-size: 10;
       }
 
-      text-fill: #000;
+      text-fill: black;
       text-face-name: @book-fonts;
       text-min-distance: 40;
       text-halo-radius: 2;
@@ -3316,8 +3316,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         text-dy: 7;
       }
       [zoom >= 17] {
-        text-size: 11;
-        text-dy: 9;
+        text-size: 10;
+        text-dy: 7;
       }
 
       text-clip: false;
@@ -3351,12 +3351,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 }
 
 #roads-text-name {
+  // RK Autobahn. Construction-Roads entfernt.
   [highway = 'motorway'],
   [highway = 'trunk'],
-  [highway = 'primary'],
-  [highway = 'construction'][construction = 'motorway'],
-  [highway = 'construction'][construction = 'trunk'],
-  [highway = 'construction'][construction = 'primary'] {
+  [highway = 'primary'] {
     [zoom >= 13] {
       text-name: "[name]";
       text-size: 8;
@@ -3386,8 +3384,9 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-size: 12;
     }
   }
-  [highway = 'secondary'],
-  [highway = 'construction'][construction = 'secondary'] { // RK z.B. GG: Linzer Straße (B3c)
+
+  // RK z.B. GG: Linzer Straße (B3c). Construction-Roads entfernt.
+  [highway = 'secondary'] {
     [zoom >= 13] {
       text-name: "[name]";
       text-size: 8;
@@ -3413,8 +3412,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-size: 12;
     }
   }
-  [highway = 'tertiary'],
-  [highway = 'construction'][construction = 'tertiary'] { // RK z.B. GG: Gusentalstr.
+  // RK z.B. GG: Gusentalstr. Construction-Roads entfernt.
+  [highway = 'tertiary'] {
     [zoom >= 14] {
       text-name: "[name]";
       text-size: 9;
@@ -3435,6 +3434,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-size: 12;
     }
   }
+  // RK Construction-Roads entfernt.
+  /*
   [highway = 'construction'][construction = null][zoom >= 16] {
     text-name: "[name]";
     text-size: 9;
@@ -3456,12 +3457,13 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-spacing: 400;
     }
   }
+  */
+
+  // RK z.B. GG: Am Kregel, Sandgasse. Construction-Roads entfernt.
   [highway = 'residential'],
   [highway = 'unclassified'],
-  [highway = 'road'],
-  [highway = 'construction'][construction = 'residential'],
-  [highway = 'construction'][construction = 'unclassified'],
-  [highway = 'construction'][construction = 'road'] { // RK z.B. GG: Am Kregel, Sandgasse
+  [highway = 'road']
+  {
     [zoom >= 15] {
       text-name: "[name]";
       text-size: 8;
@@ -3472,9 +3474,15 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-halo-radius: @standard-halo-radius;
       text-halo-fill: @residential-fill;
       text-face-name: @book-fonts;
-      text-repeat-distance: @minor-highway-text-repeat-distance;
-      text-max-char-angle-delta: 120; // RK Sonst wird z.B. Am Kregl in GG nicht beschriftet
+      text-repeat-distance: 50; // RK @minor-highway-text-repeat-distance;
+      text-max-char-angle-delta: 120; // RK Sonst werden Straßen mit "Knick" (z.B. Am Kregl in GG) nicht beschriftet
       [highway = 'unclassified'] { text-repeat-distance: @major-highway-text-repeat-distance;}
+
+      //text-simplify: 30;
+      //text-simplify-algorithm: visvalingam-whyatt;
+      //text-smooth: 0.3;
+      text-placement-type: simple;
+      text-placements: "X,10,9,8,7,6,5";
     }
     [zoom >= 16] {
       text-size: 9;
@@ -3489,14 +3497,13 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
   }
 
+  // RK z.B. GG: Am Kögel. Construction-Roads entfernt
   [highway = 'raceway'],
-  [highway = 'service'],
-  [highway = 'construction'][construction = 'raceway'],
-  [highway = 'construction'][construction = 'service'] { // RK z.B. GG: Am Kögel
+  [highway = 'service'] {
     [zoom >= 16] {
       text-name: "[name]";
-      text-size: 6;
-      text-fill: black;
+      text-size: 9;
+      text-fill: orange;
       text-spacing: 300;
       text-clip: false;
       text-placement: line;
@@ -3506,16 +3513,20 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       [highway = 'service'] { text-halo-fill: @service-fill; }
       text-face-name: @book-fonts;
       text-repeat-distance: @major-highway-text-repeat-distance;
+
+      //text-simplify: 50;
+      //text-smooth: 0.5;
+      text-placement-type: simple;
+      text-placements: "X,10,9,8,7,6,5,4"; // RK Hier bis auf 4 zurückgehen, da sonst z.B. der Saphirweg in GG nicht angezeigt wird
     }
     [zoom >= 17] {
       text-size: 11;
     }
   }
 
+  // RK Wohnstraßen: Derzeit nur in Perg Ost, Mitterberg. Construction-Roads entfernt.
   [highway = 'living_street'],
-  [highway = 'pedestrian'],
-  [highway = 'construction'][construction = 'living_street'],
-  [highway = 'construction'][construction = 'pedestrian'] {
+  [highway = 'pedestrian'] {
     [zoom >= 15] {
       text-name: "[name]";
       text-size: 8;

@@ -34,10 +34,12 @@
     text-wrap-width: 30; // 3.0 em
     text-line-spacing: -1.5; // -0.15 em
     text-margin: 3; // 0.3 em
-	text-allow-overlap: true;
-	[zoom >= 17] {
-		text-size: 10;
-	}
+    text-allow-overlap: true; // RK sonst werden die Hausnummern nicht angezeigt, sofern diese nicht ins Gebäude passen oder mit anderen überlappen
+    [zoom >= 17] {
+        text-size: 10;
+        text-placement-type: simple; // RK zieht nicht, da overlapping eingestellt ist.
+        text-placements: "X,9,8,7,6,5";
+    }
     [zoom >= 18] {
       text-halo-radius: @standard-halo-radius * 1.25;
       ["addr_unit" != null]["addr_housenumber" = null] {
