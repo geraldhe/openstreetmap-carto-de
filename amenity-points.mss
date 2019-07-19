@@ -309,8 +309,8 @@
 
   [feature = 'amenity_fire_station'][zoom >= 16] {
     marker-file: url('symbols-de/firestation.svg'); // RK Anpassung Logo FF
-    marker-width: 9;
-    marker-height: 9;
+    marker-width: 10;
+    marker-height: 12.5;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -810,19 +810,12 @@
     marker-placement: interior;
     marker-clip: false;
   }
-/*
-  [feature = 'emergency_ambulance'] {
-    marker-file: url('symbols-de/firestation.svg'); // RK RK-Stellen einzeichnen
+
+  // RK RK-Stellen einzeichnen
+  [feature = 'emergency_ambulance_station'] {
+    marker-file: url('symbols-de/ambulance.svg');
     marker-width: 10;
-    marker-height: 12.5;
-    marker-fill: @public-service;
-    marker-placement: interior;
-    marker-clip: false;
-  }
-*/
-  [feature = 'emergency_ambulance'] {
-    marker-file: url('symbols/amenity/emergency_phone.svg');
-    marker-fill: @amenity-brown;
+    marker-height: 10;
     marker-placement: interior;
     marker-clip: false;
   }
