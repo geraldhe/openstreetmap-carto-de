@@ -152,6 +152,7 @@ pe-test:
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35398/22706.png -o test/gg-einsatzzentrum-rechts.png
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35402/22712.png -o test/ff-langenstein.png
 	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35432/22714.png -o test/pe-einsatzzentrum.png
+	./scripts/render_single_tile.py -t -s $(XMLSTYLE) -u /16/35392/22712.png -o test/ausee-campingdorf.png
 
 clean:
 	rm -f project-de.* $(XMLSTYLE) test-*.png test/*
