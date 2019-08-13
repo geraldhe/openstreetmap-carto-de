@@ -30,7 +30,7 @@ def TileToMeters(tx, ty, zoom):
 
 def TileToBBox(x,y,z):
   x1,y1=TileToMeters(x-1,y+1,z)
-  x2,y2=TileToMeters(x,y,z) 
+  x2,y2=TileToMeters(x,y,z)
   return x1,y1,x2,y2
 
 if __name__ == "__main__":
@@ -40,13 +40,13 @@ if __name__ == "__main__":
   parser.add_argument('-o', '--outputfile', help='output filename default=prefix-zval-xval-yval.png, "-" for stdout')
   parser.add_argument('-p', '--prefix', default='mapnik')
   parser.add_argument('-t', '--time', help='Output rendering time', default=False, action='store_true')
-  group = parser.add_mutually_exclusive_group(required=True)          
+  group = parser.add_mutually_exclusive_group(required=True)
   group.add_argument('-c', '--lonlat', nargs=3, help='zoom lon lat Position of tile')
-  group.add_argument('-m', '--zxy', nargs=3, help='z x y Name of Tile')                              
+  group.add_argument('-m', '--zxy', nargs=3, help='z x y Name of Tile')
   group.add_argument('-u', '--url', help='Tile URL from which z,x and y will be extracted')
 
   args = parser.parse_args()
-  
+
   if os.path.exists(args.stylefile):
     mapfile=args.stylefile
   else:
@@ -62,13 +62,13 @@ if __name__ == "__main__":
     z = int(res[0][0])
     x = int(res[0][1])
     y = int(res[0][2])
-  
+
   if args.lonlat:
     z=int(args.lonlat[0])
     lonx=float(args.lonlat[1])
     laty=float(args.lonlat[2])
     x,y = deg2num(lonx, laty, z)
-    
+
   if args.zxy:
     z=int(args.zxy[0])
     x=int(args.zxy[1])
@@ -80,7 +80,7 @@ if __name__ == "__main__":
   import mapnik
   custom_fonts_dir = '/etc/mapnik-osm-data/fonts/'
   mapnik.register_fonts(custom_fonts_dir)
-  scale = 2
+  scale = 3
   m = mapnik.Map(256*scale, 256*scale)
   mapnik.load_map(m, mapfile)
   bba=TileToBBox(x,y,z)
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     ofile=args.outputfile
   else:
     ofile=args.prefix+'-'+str(z)+'-'+str(x)+'-'+str(y)+'.png'
-  
+
   if ofile != '-':
     f = open(ofile, 'w')
     f.write(im.tostring('png'));
@@ -102,5 +102,3 @@ if __name__ == "__main__":
   if args.time:
     end = time.time()
     print("rendering time: %d seconds" % (end - start))
-    
-  

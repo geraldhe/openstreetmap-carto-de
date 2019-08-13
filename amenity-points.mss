@@ -35,12 +35,14 @@
 @landcover-line-spacing-size-bigger: -2.25; // -0.15 em
 @landcover-face-name: @oblique-fonts;
 
-@standard-font-size: 9;
+@standard-font-size: 8;
 @standard-wrap-width: 25; // 3 em
 @standard-line-spacing-size: -1.5; // -0.15 em
 @standard-font: @book-fonts;
 
 #amenity-points {
+// RK START Einrichtungen ausblenden (Bank, Gemeinde, ATM, ...)
+/*
   [feature = 'tourism_alpine_hut'][zoom >= 13],
   [feature = 'tourism_wilderness_hut'][zoom >= 13],
   [feature = 'amenity_shelter'][zoom >= 16] {
@@ -303,14 +305,6 @@
   [feature = 'amenity_nightclub'][zoom >= 17] {
     marker-file: url('symbols/amenity/nightclub.svg');
     marker-fill: @amenity-brown;
-    marker-placement: interior;
-    marker-clip: false;
-  }
-
-  [feature = 'amenity_fire_station'][zoom >= 16] {
-    marker-file: url('symbols-de/firestation.svg'); // RK Anpassung Logo FF
-    marker-width: 10;
-    marker-height: 12.5;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -765,13 +759,6 @@
     marker-clip: false;
   }
 
-  [feature = 'amenity_police'][zoom >= 16] {
-    marker-file: url('symbols/amenity/police.svg');
-    marker-fill: @public-service;
-    marker-placement: interior;
-    marker-clip: false;
-  }
-
   [feature = 'amenity_vehicle_inspection'][zoom >= 17] {
     marker-file: url('symbols/amenity/vehicle_inspection.svg');
     marker-fill: @public-service;
@@ -807,15 +794,6 @@
   [feature = 'amenity_telephone'][zoom >= 17] {
     marker-file: url('symbols/amenity/telephone.svg');
     marker-fill: @amenity-brown;
-    marker-placement: interior;
-    marker-clip: false;
-  }
-
-  // RK RK-Stellen einzeichnen
-  [feature = 'emergency_ambulance_station'] {
-    marker-file: url('symbols-de/ambulance.svg');
-    marker-width: 10;
-    marker-height: 10;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -994,7 +972,7 @@
     marker-clip: false;
   }
 
-  /* old german style castle rendering */
+  // old german style castle rendering
   [feature = 'historic_castle'][zoom >= 14][zoom < 16] {
     marker-file: url('symbols-de/atkis/burg.svg');
     marker-fill: @man-made-icon;
@@ -1629,6 +1607,32 @@
       marker-fill: @man-made-icon;
       marker-placement: interior;
     }
+  }
+*/
+// RK ENDE Einrichtungen ausblenden
+
+  [feature = 'amenity_police'][zoom >= 16] {
+    marker-file: url('symbols/amenity/police.svg');
+    marker-fill: @public-service;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
+  [feature = 'amenity_fire_station'][zoom >= 16] {
+    marker-file: url('symbols-de/firestation.svg'); // RK Anpassung Logo FF
+    marker-width: 10;
+    marker-height: 12.5;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
+  // RK RK-Stellen einzeichnen
+  [feature = 'emergency_ambulance_station'][zoom >= 16] {
+    marker-file: url('symbols-de/ambulance.svg');
+    marker-width: 10;
+    marker-height: 10;
+    marker-placement: interior;
+    marker-clip: false;
   }
 }
 
