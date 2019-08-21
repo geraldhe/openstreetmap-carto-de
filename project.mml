@@ -1713,7 +1713,8 @@ Layer:
             way,
             place,
             leisure,
-            localized_name_second as name
+            localized_name_second as name,
+            getcolor(HASHTEXT(localized_name_second)) AS color
           FROM planet_osm_point
           WHERE place IN ('village', 'hamlet')
              AND name IS NOT NULL
