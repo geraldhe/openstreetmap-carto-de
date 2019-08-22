@@ -318,7 +318,7 @@
 
 @junction-text-color:             #0528a2;
 @halo-color-for-minor-road: white;
-@lowzoom-halo-color:              white;
+@lowzoom-halo-color:              @standard-halo-fill;
 @lowzoom-halo-width:              1;
 
 @motorway-oneway-arrow-color:     #6c70d5;
@@ -3472,7 +3472,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
       text-clip: false;
       text-placement: line;
       text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @residential-fill;
+      text-halo-fill: @standard-halo-fill;
       text-face-name: @book-fonts;
       text-repeat-distance: 50; // RK @minor-highway-text-repeat-distance;
       text-max-char-angle-delta: 120; // RK Sonst werden Straßen mit "Knick" (z.B. Am Kregl in GG) nicht beschriftet
@@ -3503,7 +3503,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     [zoom >= 16] {
       text-name: "[name]";
       text-size: 9;
-      text-fill: orange;
+      text-fill: black;
       text-spacing: 300;
       text-clip: false;
       text-placement: line;
