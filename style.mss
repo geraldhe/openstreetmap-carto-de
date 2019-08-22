@@ -9,4 +9,4 @@ Map {
 @river-color: #97c9d8;     // Lch(78,18,225)
 
 @standard-halo-radius: 0.9;
-@standard-halo-fill: rgba(255,255,255,0.6);
+@standard-halo-fill: rgba(255,255,255,0.7);
